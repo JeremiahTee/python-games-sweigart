@@ -1,7 +1,7 @@
 import random
 import time
 
-def displayIntro():
+def displayIntro(): #this is a multi-line
     print('''You are in a land full of dragons. In front of you are two caves.
     In one cave, the dragon is blind and will not attack you. The other dragon is blood-thirsty
     and will eat you on sight.''')
@@ -23,14 +23,16 @@ def checkCave(chosenCave):
     print('A large dragon jumps out in front of you! He opens his jaws and...')
     print()
     time.sleep(2)
-    print('WRAHHHHH! \n The dragon ')
+    print('WRAHHHH!\nThe dragon ')
 
     friendlyCave = random.randint(1,2)
 
     if chosenCave == str(friendlyCave):
-        print('does not see you. You remain alive.')
+        print('''does not see you. 
+        You remain ALIVE.''')
     else:
-        print('opens his mouth and eats you. YOU DIED.')
+        print('opens his mouth and eats you. '
+              'YOU DIED.''')
 
 playAgain = 'yes'
 while playAgain == 'yes' or playAgain == 'y':

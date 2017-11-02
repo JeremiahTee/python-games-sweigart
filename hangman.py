@@ -74,8 +74,8 @@ def playAgain():
     return input().lower().startswith('y')
 
 print('H A N G M A N')
-missedLetters = ' '
-correctLetters = ' '
+missedLetters = ''
+correctLetters = ''
 secretWord = getRandomWord(words)
 isDone = False
 
@@ -115,4 +115,5 @@ while not isDone:
                 isDone = False
                 secretWord = getRandomWord(words)
             else:
+                print('Thank you for playing!')
                 break

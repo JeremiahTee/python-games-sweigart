@@ -42,8 +42,9 @@ def displayBoard(missedLetters, correctLetters, secretWord):
 
     print('Missed letters:', end=' ')
     for letter in missedLetters:
-        print(letter, end = '')
-        print()
+        print(letter, end = ' ')
+
+    print()
     blanks = '_' * len(secretWord)
 
     for i in range (len(secretWord)): # Replace blanks with correctly guessed letters
@@ -91,7 +92,7 @@ while not isDone:
             if secretWord[i] not in correctLetters:
                 foundAllLetters = False
                 break
-            if foundAllLetters:
+        if foundAllLetters:
                 print('Yes! The secret word is ' + secretWord + ". You have won!")
                 isDone = True
     else:

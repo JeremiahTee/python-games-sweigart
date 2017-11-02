@@ -54,6 +54,10 @@ def displayBoard(missedLetters, correctLetters, secretWord):
     for letter in blanks: #Show the secret word with spaces in between each letter
         print(letter, end=' ')
 
+    #Check if it's last guess
+    if len(missedLetters) == len(HANGMAN_PICS) - 2:
+        print('\nCareful! This is your last guess.')
+
 def getGuess(alreadyGuessed):
     #Returns the letter the player entered. This function makes sure the player entered a single letter.
     while True:
@@ -103,8 +107,8 @@ while not isDone:
         displayBoard(missedLetters, correctLetters, secretWord)
         print('You have run out of guesses!\nAfter ' +
               str(len(missedLetters)) + ' missed guesses and ' +
-                  str(len(correctLetters)) + ' correct guesses, the word was "' +
-                  secretWord + '"')
+              str(len(correctLetters)) + ' correct guesses, the word was "' +
+              secretWord + '"')
         isDone = True
 
     #Ask player to play again (only if game is done)

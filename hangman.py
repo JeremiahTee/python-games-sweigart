@@ -12,8 +12,8 @@ HANGMAN_PICS = ['''
        ===''','''
     +---+ 
     0   |
-   /|      |
-       |
+   /|   |
+        |
        ===''','''     
     +---+ 
     0   |
@@ -44,7 +44,7 @@ HANGMAN_PICS = ['''
 #words = 'dog cat ant bat rat sloth python whale werewolf llama panda cougar lizard moose mouse'.split()
 words = {'Colors': 'red orange yellow green blue indigo violet white black brown'.split(),
          'Shapes': 'square triangle rectangle circle ellipse trapezoid pentagon hexagon octagon'.split(),
-         'Fruits': 'apples orange lemon lime pear watermelon banana mango tomato strawberry'.split()
+         'Fruits': 'apples orange lemon lime pear watermelon banana mango tomato strawberry'.split(),
          'Animals': 'dog cat ant bat rat sloth python whale werewolf llama panda cougar lizard moose mouse'.split()}
 
 '''
@@ -61,7 +61,7 @@ def getRandomWord(wordDict): #updated function for dictionaries
     wordKey = random.choice(list(wordDict.keys())) #using choice() from random
 
     #Second, randomly select a word from the key's list in the dictionary
-    wordIndex = random.randint(0, len(wordDict[wordKey] - 1))
+    wordIndex = random.randint(0, len(wordDict[wordKey]) - 1)
 
     return [wordDict[wordKey][wordIndex], wordKey]
 
@@ -127,7 +127,7 @@ secretWord,secretSet = getRandomWord(words) #multiple assignment, where secretSe
 isDone = False
 
 while not isDone:
-    print('The secret word is in the set' + secretSet)
+    print('The secret word is in the set: ' + secretSet.lower())
     displayBoard(missedLetters, correctLetters, secretWord)
     #Let the player enter a letter
     guess = getGuess(missedLetters + correctLetters)

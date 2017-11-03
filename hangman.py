@@ -106,12 +106,28 @@ def playAgain():
     return input().lower().startswith('y')
 
 print('H A N G M A N')
+
+difficulty = ''
+while difficulty not in 'EMH':
+    print('Enter difficulty: E - Easy, M - Medium, H - Hard')
+    difficulty = input().upper()
+
+if difficulty == 'M':
+    del HANGMAN_PICS[8]
+    del HANGMAN_PICS[7]
+if difficulty == 'H':
+    del HANGMAN_PICS[8]
+    del HANGMAN_PICS[7]
+    del HANGMAN_PICS[5]
+    del HANGMAN_PICS[3]
+
 missedLetters = ''
 correctLetters = ''
-secretWord = getRandomWord(words)
+secretWord,secretSet = getRandomWord(words) #multiple assignment, where secretSet is the key of the dictionary
 isDone = False
 
 while not isDone:
+    print('The secret word is in the set' + secretSet)
     displayBoard(missedLetters, correctLetters, secretWord)
     #Let the player enter a letter
     guess = getGuess(missedLetters + correctLetters)
@@ -145,7 +161,7 @@ while not isDone:
                 missedLetters = ''
                 correctLetters = ''
                 isDone = False
-                secretWord = getRandomWord(words)
+                secretWord, secretSet= getRandomWord(words)
             else:
                 print('Thank you for playing!')
                 break

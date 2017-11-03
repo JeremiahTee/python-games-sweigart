@@ -29,7 +29,17 @@ HANGMAN_PICS = ['''
     0   |
    /|\  |
    / \  |
-       ===''']
+       ===''','''
+   +---+
+   [0   |
+   /|\  |
+   / \  |
+       ===''','''
+   +---+
+   [0]  |
+   /|\  |
+   / \  |      
+      ''']
 words = 'dog cat ant bat rat sloth python whale werewolf llama panda cougar lizard moose mouse'.split()
 
 def getRandomWord(wordList):

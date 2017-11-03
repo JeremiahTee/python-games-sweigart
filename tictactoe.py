@@ -35,3 +35,14 @@ def whoGoesFirst():
 def makeMove(board, letter, move):
     board[move] = letter
 
+def isWinner(bo, le):
+    # Given a board & player's letter, return True if that player has won
+    return ((bo[7] == le and bo[8] == le and bo[9] == le) or  # Across the top
+            (bo[4] == le and bo[5] == le and bo[6] == le) or  # Across the middle
+            (bo[1] == le and bo[2] == le and bo[3] == le) or  # Across the bottom
+            (bo[7] == le and bo[4] == le and bo[1] == le) or  # 1st column
+            (bo[8] == le and bo[5] == le and bo[2] == le) or  # 2nd column
+            (bo[9] == le and bo[6] == le and bo[3] == le) or  # 3rd column
+            (bo[7] == le and bo[5] == le and bo[3] == le) or  #Diagonal
+            (bo[9] == le and bo[5] == le and bo[1] == le)     #Anti-diagonal
+            )

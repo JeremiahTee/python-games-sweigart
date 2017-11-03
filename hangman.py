@@ -40,12 +40,30 @@ HANGMAN_PICS = ['''
    /|\  |
    / \  |      
       ''']
-words = 'dog cat ant bat rat sloth python whale werewolf llama panda cougar lizard moose mouse'.split()
 
+#words = 'dog cat ant bat rat sloth python whale werewolf llama panda cougar lizard moose mouse'.split()
+words = {'Colors': 'red orange yellow green blue indigo violet white black brown'.split(),
+         'Shapes': 'square triangle rectangle circle ellipse trapezoid pentagon hexagon octagon'.split(),
+         'Fruits': 'apples orange lemon lime pear watermelon banana mango tomato strawberry'.split()
+         'Animals': 'dog cat ant bat rat sloth python whale werewolf llama panda cougar lizard moose mouse'.split()}
+
+'''
 def getRandomWord(wordList):
     #This function returns a random string from the passed list of strings
     wordIndex = random.randint(0, len(wordList) - 1)
     return wordList[wordIndex]
+'''
+
+def getRandomWord(wordDict): #updated function for dictionaries
+    #This function returns a random string from the passed dictionary of lists fo strings and its key
+
+    #First, randomly select a key from dictionary:
+    wordKey = random.choice(list(wordDict.keys())) #using choice() from random
+
+    #Second, randomly select a word from the key's list in the dictionary
+    wordIndex = random.randint(0, len(wordDict[wordKey] - 1))
+
+    return [wordDict[wordKey][wordIndex], wordKey]
 
 def displayBoard(missedLetters, correctLetters, secretWord):
     print(HANGMAN_PICS[len(missedLetters)] + "\n")

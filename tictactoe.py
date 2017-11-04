@@ -81,23 +81,23 @@ def chooseRandomMoveFromList(board, movesList):
         return None
 
 def getComputerMove(board, computerLetter):
-    #Given a board and the computer's letter, determine where to move and return that move
+    # Given a board and the computer's letter, determine where to move and return that move
     if computerLetter == 'X':
         playerLetter = 'O'
     else:
         playerLetter = 'X'
 
-    #Algorithm for Tic-Tac-Toe AI:
-        #First, check if we can win in the next move.
-        for i in range (1,10):
+        # Algorithm for Tic-Tac-Toe AI:
+        # First, check if we can win in the next move.
+        for i in range(1, 10):
             boardCopy = getBoardCopy(board)
             if isSpaceFree(boardCopy, i):
                 makeMove(boardCopy, computerLetter, i)
                 if isWinner(boardCopy, computerLetter):
                     return i
 
-        #Check if the player could win on their next move and block them
-        for i in range (1,10):
+        # Check if the player could win on their next move and block them
+        for i in range(1, 10):
             boardCopy = getBoardCopy(board)
             if isSpaceFree(boardCopy, i):
                 makeMove(boardCopy, playerLetter, i)
@@ -105,7 +105,7 @@ def getComputerMove(board, computerLetter):
                     return i
 
         # Try to take one of the corners, if they are free
-        move = chooseRandomMoveFromList(board, [1,3,7,9])
+        move = chooseRandomMoveFromList(board, [1, 3, 7, 9])
         if move != None:
             return move
 
@@ -113,5 +113,48 @@ def getComputerMove(board, computerLetter):
         if isSpaceFree(board, 5):
             return 5
 
-        #Move on one of the sides.
-        return chooseRandomMoveFromList(board, [2,4,6,8])
+        # Move on one of the sides.
+        return chooseRandomMoveFromList(board, [2, 4, 6, 8])
+
+def isBoardFull(board):
+    for i in range(1,10):
+        if isSpaceFree(board, i): #if any of the slots are free, return false. it is not full
+            return False
+        else:
+            return True
+
+###Core of Program###
+print('Welcome to Tic-Tac-Toe!')
+
+while True:
+    # Reset the board.
+    theBoard = [' '] * 10
+    playerLetter, computerLetter = inputPlayerLetter()
+    turn = whoGoesFirst()
+    print('The ' + turn + ' will go first.')
+    gameIsPlaying = True
+
+    while gameIsPlaying:
+        if turn == 'player':
+            # Player's turn
+            drawBoard(theBoard)
+            move = getPlayerMove(theBoard)
+            makeMove(theBoard, playerLetter, move)
+
+            if isWinner(theBoard, playerLetter):
+                drawBoard(theBoard)
+                print('Hooray! You have won the game!')
+                gameIsPlaying = False
+            else:
+                if isBoardFull(theBoard):
+                    drawBoard(theBoard)
+                    print('The game is a tie!')
+                    break
+                else:
+                    turn = 'computer'
+        else:
+            # Computer's turn
+            move = getComputerMove(theBoard, computerLetter)
+
+
+

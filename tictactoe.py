@@ -120,8 +120,7 @@ def isBoardFull(board):
     for i in range(1,10):
         if isSpaceFree(board, i): #if any of the slots are free, return false. it is not full
             return False
-        else:
-            return True
+    return True
 
 ###Core of Program###
 print('Welcome to Tic-Tac-Toe!')
@@ -157,7 +156,7 @@ while True:
             move = getComputerMove(theBoard, computerLetter)
             makeMove(theBoard, computerLetter, move)
 
-            if isWinner(theBoard, playerLetter):
+            if isWinner(theBoard, computerLetter):
                 drawBoard(theBoard)
                 print('The computer has beaten you! You suck.')
                 gameIsPlaying = False

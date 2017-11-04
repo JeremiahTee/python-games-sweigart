@@ -56,7 +56,7 @@ def getBoardCopy(board):
     return boardCopy
 
 def isSpaceFree(board, move):
-    # Return True if the assed move is free on the passed board.
+    # Return True if the passed move is free on the passed board.
     return board[move] == ' '
 
 def getPlayerMove(board):
@@ -87,34 +87,34 @@ def getComputerMove(board, computerLetter):
     else:
         playerLetter = 'X'
 
-        # Algorithm for Tic-Tac-Toe AI:
-        # First, check if we can win in the next move.
-        for i in range(1, 10):
-            boardCopy = getBoardCopy(board)
-            if isSpaceFree(boardCopy, i):
-                makeMove(boardCopy, computerLetter, i)
-                if isWinner(boardCopy, computerLetter):
-                    return i
+    # Algorithm for Tic-Tac-Toe AI:
+    # First, check if we can win in the next move.
+    for i in range(1, 10):
+        boardCopy = getBoardCopy(board)
+        if isSpaceFree(boardCopy, i):
+            makeMove(boardCopy, computerLetter, i)
+            if isWinner(boardCopy, computerLetter):
+                return i
 
         # Check if the player could win on their next move and block them
-        for i in range(1, 10):
-            boardCopy = getBoardCopy(board)
-            if isSpaceFree(boardCopy, i):
-                makeMove(boardCopy, playerLetter, i)
-                if isWinner(boardCopy, playerLetter):
-                    return i
+    for i in range(1, 10):
+        boardCopy = getBoardCopy(board)
+        if isSpaceFree(boardCopy, i):
+            makeMove(boardCopy, playerLetter, i)
+            if isWinner(boardCopy, playerLetter):
+                return i
 
         # Try to take one of the corners, if they are free
-        move = chooseRandomMoveFromList(board, [1, 3, 7, 9])
-        if move != None:
-            return move
+    move = chooseRandomMoveFromList(board, [1, 3, 7, 9])
+    if move != None:
+        return move
 
-        # Try to take the center if it is free.
-        if isSpaceFree(board, 5):
-            return 5
+    # Try to take the center if it is free.
+    if isSpaceFree(board, 5):
+        return 5
 
-        # Move on one of the sides.
-        return chooseRandomMoveFromList(board, [2, 4, 6, 8])
+    # Move on one of the sides.
+    return chooseRandomMoveFromList(board, [2, 4, 6, 8])
 
 def isBoardFull(board):
     for i in range(1,10):

@@ -155,6 +155,20 @@ while True:
         else:
             # Computer's turn
             move = getComputerMove(theBoard, computerLetter)
+            makeMove(theBoard, computerLetter, move)
 
+            if isWinner(theBoard, playerLetter):
+                drawBoard(theBoard)
+                print('The computer has beaten you! You suck.')
+                gameIsPlaying = False
+            else:
+                if isBoardFull(theBoard):
+                    drawBoard(theBoard)
+                    print('The game is a tie!')
+                    break
+                else:
+                    turn = 'player'
 
-
+    print('Do you want to play again? (yes or no)')
+    if not input().lower().startswith('y'):
+        break

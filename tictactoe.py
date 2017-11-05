@@ -62,10 +62,13 @@ def isSpaceFree(board, move):
 def getPlayerMove(board):
     # Let the player enter their move
     move = ' '
-    while move not in '1 2 3 4 5 6 7 8 9'.split() or not isSpaceFree(board, int(move)):
+    validMoves = '1 2 3 4 5 6 7 8 9'.split()
+    #example of short-circuiting. if player enters 'z' then first condition is true,
+    #we go inside the while loop. therefore isSpaceFree is not evaluated
+    while move not in validMoves or not isSpaceFree(board, int(move)):
         print('What is your next move? (1-9)')
         move = input()
-        if not isSpaceFree(board, int(move)):
+        if move in validMoves and not isSpaceFree(board, int(move)):
             print('The spot is already taken! Make another move:')
     return int(move)
 

@@ -65,6 +65,8 @@ def getPlayerMove(board):
     while move not in '1 2 3 4 5 6 7 8 9'.split() or not isSpaceFree(board, int(move)):
         print('What is your next move? (1-9)')
         move = input()
+        if not isSpaceFree(board, int(move)):
+            print('The spot is already taken! Make another move:')
     return int(move)
 
 def chooseRandomMoveFromList(board, movesList):

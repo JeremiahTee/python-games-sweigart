@@ -170,4 +170,5 @@ while True:
 
     print('Do you want to play again? (yes or no)')
     if not input().lower().startswith('y'):
+        print('Thank you for playing! The AI is too good, I know.')
         break

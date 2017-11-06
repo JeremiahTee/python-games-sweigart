@@ -71,4 +71,5 @@ while True:
 
     print('Do you want to play again? (yes or no)')
     if not input().lower().startswith('y'):
+        print('This deduction game is hard. I know. Just take your time & be careful of your guesses!')
         break

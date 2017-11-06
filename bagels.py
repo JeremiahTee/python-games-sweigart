@@ -10,7 +10,7 @@ def getSecretNum():
     random.shuffle(numbers)
     secretNum = ''
     for i in range(NUM_DIGITS):
-        secretNum =+ str(numbers[i])
+        secretNum += str(numbers[i])
 
 def getClues(guess, secretNum):
     #Returns a string with the Pico, Fermi, & Bagels clues to the user.
@@ -44,10 +44,10 @@ def isOnlyDigits(num):
 #Core of the program
 print('I am thinking of a %s-digit number. Try to guess what it is.' %(NUM_DIGITS))
 print('The clues I give are...')
-print('When I say:\tThat means:')
-print('Bagels\tNone of the digits is correct.')
-print('Pico\tOne digit is correct but in the wrong position.')
-print('Fermi\tOne digit is correct and in the right position')
+print('When I say:\t\tThat means:')
+print('Bagels\t\tNone of the digits is correct.')
+print('Pico\t\tOne digit is correct but in the wrong position.')
+print('Fermi\t\tOne digit is correct and in the right position')
 
 while True:
     secretNum = getSecretNum()
@@ -67,3 +67,7 @@ while True:
             break
         if guessesTaken > MAX_GUESS:
             print('You ran out of guesses. The answer was %s.' %(secretNum))
+
+    print('Do you want to play again? (yes or no)')
+    if not input().lower().startswith('y'):
+        break

@@ -11,6 +11,7 @@ def getSecretNum():
     secretNum = ''
     for i in range(NUM_DIGITS):
         secretNum += str(numbers[i])
+    return secretNum
 
 def getClues(guess, secretNum):
     #Returns a string with the Pico, Fermi, & Bagels clues to the user.

@@ -24,8 +24,8 @@ def getClues(guess, secretNum):
             clues.append('Fermi')
         elif guess[i] in secretNum:
             clues.append('Pico')
-        if len(clues) == 0:
-            return 'Bagels'
+    if len(clues) == 0:
+        return 'Bagels'
 
     clues.sort()
     return ' '.join(clues)
@@ -51,7 +51,8 @@ print('Pico\t\tOne digit is correct but in the wrong position.')
 print('Fermi\t\tOne digit is correct and in the right position')
 
 while True:
-    secretNum = getSecretNum()
+    #secretNum = getSecretNum()
+    secretNum = '175'
     print('I have thought up a number. You have %s guesses to get it.' %(MAX_GUESS))
 
     guessesTaken = 1

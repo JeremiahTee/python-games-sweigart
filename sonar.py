@@ -63,3 +63,28 @@ def isOnBoard(x,y):
     return x >= 0 and x <= 59 and y >= 0 and y <= 14
 
 def makeMove(board, chests, x, y):
+    # Change the board data structure with a sonar device character
+        #Remove treasure chests from the chests list as they are found.
+    #Return False is invalid move, otherwise return the string of the result of this move.
+    smallestDistance = 100 # Any chest will be closer than 100.
+    for cx, cy in chests:
+        distance = math.sqrt((cx - x) * (cx-x) + (cy-y) * (cy-y))
+
+        if distance < smallestDistance: #We want the closest treasure chest
+            smallestDistance = distance
+
+        smallestDistance = round(smallestDistance)
+
+        if smallestDistance == 0: #xy is directly on a treasure chest!
+            chests.remove([x,y])
+            return 'You have found a sunken treasure chest!'
+        else:
+            if smallestDistance < 10:
+                board[x][y] = str(smallestDistance) #overwrite character with distance
+                return 'Treasure detected at a distance of %s from the sonar device' % (smallestDistance)
+            else:
+                board[x,y] = 'X' #sonar can detect up to 25 only
+                return 'Sonar did not detect anything. All treasure chests are out of range.'
+
+def enterPlayerMove(previousMoves):
+    

@@ -206,4 +206,3 @@ while True:
     if not input().lower().startswith('y'):
         print('Good games, padowan.')
         sys.exit()
-

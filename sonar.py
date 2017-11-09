@@ -170,7 +170,7 @@ while True:
 
     while sonarDevices > 0:
         # Show sonar devices and chest statuses.
-        print('You have $s sonar device(s) left. %s treasure chest(s) remaining' % (sonarDevices, len(theChests)))
+        print('You have %s sonar device(s) left. %s treasure chest(s) remaining' % (sonarDevices, len(theChests)))
 
         x, y = enterPlayerMove(previousMoves)
         previousMoves.append([x,y])  #keep track of moves so sonar devices can be updated

@@ -4,6 +4,7 @@
 import random
 import sys
 import math
+import time as t
 
 def getNewBoard():
     #Create a new 60x15 board data structure.
@@ -195,6 +196,8 @@ while True:
             print('''We\'ve run out of sonar devices! Now we have to turn the ship around and head
             home. Game over.
             The remaining chests were here:''')
+            print('...')
+            t.sleep(1)
             for x, y in theChests:
                 print('     %s, %s' % (x,y))
 

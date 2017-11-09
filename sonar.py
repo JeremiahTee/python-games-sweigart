@@ -150,3 +150,21 @@ def showInstructions():
     up to a distance of 9 spaces. Try to collect all 3 chests before running out of
     sonar devices! Good luck!
     ''')
+
+#Core of the program
+
+print('S O N A R')
+print()
+print('Would you like to view the instructions? (yes/no)')
+if input().lower().startswith('y'):
+    showInstructions()
+
+while True:
+    #Game setup
+    sonarDevices = 20
+    theBoard = getNewBoard()
+    theChests = getRandomChests(3)
+    drawBoard(theBoard)
+    previousMoves = []
+
+    

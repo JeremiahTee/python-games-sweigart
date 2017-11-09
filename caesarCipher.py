@@ -24,15 +24,30 @@ def getKey():
         if(key >= 1 and key <= MAX_KEY_SIZE):
             return key
 
-def getTranslatedMessage(mode, message, key):
+def getTranslatedMessage(mode, msg, key):
     if mode[0] == 'd':
         key = -key #for decrypting, we shift to the left
     translated = ''
 
-    for symbol in message:
+    for symbol in msg:
         symbolIndex = SYMBOLS.find(symbol) #returns -1 if symbol not found
         if symbolIndex == -1: #Symbol not found in SYMBOLS
             # add the symbol without any change
             translated += symbol
         else:
             # Encrypt or decrypt
+            symbolIndex += key
+
+            if symbolIndex >= len(SYMBOLS):
+                symbolIndex -= len(SYMBOLS)
+            elif symbolIndex < 0:
+                symbolIndex += len(SYMBOLS)
+
+            translated += SYMBOLS[symbolIndex]
+    return translated
+
+mode = getMode()
+msg = getMsg()
+key = getKey()
+print('Your translated text is: ')
+print(getTranslatedMessage(mode, msg, key))

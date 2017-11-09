@@ -74,18 +74,18 @@ def makeMove(board, chests, x, y):
         if distance < smallestDistance: #We want the closest treasure chest
             smallestDistance = distance
 
-        smallestDistance = round(smallestDistance)
+    smallestDistance = round(smallestDistance)
 
-        if smallestDistance == 0: #xy is directly on a treasure chest!
-            chests.remove([x,y])
-            return 'You have found a sunken treasure chest!'
+    if smallestDistance == 0: #xy is directly on a treasure chest!
+        chests.remove([x,y])
+        return 'You have found a sunken treasure chest!'
+    else:
+        if smallestDistance < 10:
+            board[x][y] = str(smallestDistance) #overwrite character with distance
+            return 'Treasure detected at a distance of %s from the sonar device' % (smallestDistance)
         else:
-            if smallestDistance < 10:
-                board[x][y] = str(smallestDistance) #overwrite character with distance
-                return 'Treasure detected at a distance of %s from the sonar device' % (smallestDistance)
-            else:
-                board[x,y] = 'X' #sonar can detect up to 25 only
-                return 'Sonar did not detect anything. All treasure chests are out of range.'
+            board[x][y] = 'X' #sonar can detect up to 25 only
+            return 'Sonar did not detect anything. All treasure chests are out of range.'
 
 def enterPlayerMove(previousMoves):
     # Let the player enter their move. Return a two-item list of int xy coordinates.
@@ -101,7 +101,7 @@ def enterPlayerMove(previousMoves):
             if [int(move[0]), int(move[1])] in previousMoves:
                 print('You already moved there.')
                 continue
-            return [int(move[0]), int[move(1)]]
+            return [int(move[0]), int(move[1])]
 
         print('Enter a number from 0 to 59, a space, then a number from 0 to 14.')
 
@@ -176,15 +176,16 @@ while True:
         previousMoves.append([x,y])  #keep track of moves so sonar devices can be updated
 
         moveResult = makeMove(theBoard, theChests, x, y)
-        if moveResult == False:
-            continue
-        else:
-            if moveResult == 'You have found a sunken treasure chest!':
+
+        if moveResult == 'You have found a sunken treasure chest!':
                 # Update all the sonar devices currently on the map.
                 for x, y in previousMoves:
                     makeMove(theBoard, theChests, x, y)
                 drawBoard(theBoard)
                 print(moveResult)
+        else:
+            print(moveResult)
+            drawBoard(theBoard)
 
         if len(theChests) == 0:
             print('You have found all sunken treasure chests! Congratulations and GG.')
@@ -201,8 +202,8 @@ while True:
             for x, y in theChests:
                 print('     %s, %s' % (x,y))
 
-        print('Do you want to play again? (yes or no')
-        if not input().lower().startswith('y'):
-            print('Good games, padowan.')
-            sys.exit()
+    print('Do you want to play again? (yes or no)')
+    if not input().lower().startswith('y'):
+        print('Good games, padowan.')
+        sys.exit()
 

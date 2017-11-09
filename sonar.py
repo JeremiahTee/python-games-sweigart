@@ -15,7 +15,7 @@ def getNewBoard():
             if random.randint(0,1) == 0:
                 board[x].append('~')
             else:
-                board[x].append('^')
+                board[x].append('`')
     return board
 
 def drawBoard(board):
@@ -104,3 +104,31 @@ def enterPlayerMove(previousMoves):
 
         print('Enter a number from 0 to 59, a space, then a number from 0 to 14.')
 
+def showInstructions():
+    print('''Instructions:
+    You are the captain of the Simon, a treasure-hunting ship. Your current mission
+    is to use sonar devices to find three sunken treasures chests at the bottom of
+    the ocean. But you only have cheap sonar that finds distance, not direction.
+    
+    Enter the coordinates to drop a sonar device. The ocean map will be marked with
+    how far away the nearest chest is, or an X if it is beyond the sonar devices'
+    range. For example, the C marks where the chests are. The sonar device shows a
+    3 because the closest chest is 3 spaces away.
+                1         2         3
+       012345678901234567890123456789012
+    
+     0 ~~~~`~```~`~``~~~``~`~~``~~~``~`~ 0
+     1 ~`~`~``~~`~```~~~```~~`~`~~~`~~~~ 1
+     2 `~`C``3`~~~~`C`~~~~`````~~``~~~`` 2
+     3 ````````~~~`````~~~`~`````~`~``~` 3
+     4 ~`~~~~`~~`~~`C`~``~~`~~~`~```~``~ 4
+    
+       012345678901234567890123456789012
+                1         2         3
+    (In the real game, the chests are not visible in the ocean.)
+    
+    Press enter to continue...)''')
+    input()
+
+    print('''When you drop a sonar device 
+    ''')

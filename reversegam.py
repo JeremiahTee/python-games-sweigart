@@ -43,14 +43,39 @@ def isValidMove(board, tile, xstart, ystart):
             x += xdirection
             y += ydirection
             if isOnBoard(x, y) and board[x][y] == tile:
-                # There are pieces to flip over. Go in the reverse direction
-                # until we reach the original space, noting all tiles along the way
-            while True:
-                x -= xdirection
-                y -= ydirection
-                if x == xstart and y == ystart:
-                    break
-                tilesToFlip.append([x,y])
+            # There are pieces to flip over. Go in the reverse direction
+            # until we reach the original space, noting all tiles along the way
+                while True:
+                    x -= xdirection
+                    y -= ydirection
+                    if x == xstart and y == ystart:
+                        break
+                    tilesToFlip.append([x,y])
     if len(tilesToFlip) == 0: # If no tiles were flipped, this is not a valid move.
         return False
     return tilesToFlip
+
+def isOnBoard(x, y):
+    # Return True if the coordinates are located on the board.
+    return x >= 0 and x <= WIDTH - 1 and y >= 0 and y <= HEIGHT - 1
+
+def getBoardWithValidMoves(board, tile):
+    # Return a new board with periods marking the valid moves the player can make
+    validMoves = []
+    for x in range(WIDTH):
+        for y in range(HEIGHT):
+            if isValidMove(board, tile, x, y) != False:
+                validMoves.append([x, y])
+    return validMoves
+
+def getScoreOfBoard(board):
+    # Determine the score by counting the tiles. Return a dictionary with keys 'X' and 'O'
+    xscore = 0
+    oscore = 0
+    for x in range(WIDTH):
+        for y in range(HEIGHT):
+            if board[x][y] == 'X':
+                xscore += 1
+            if board[x][y] == 'O':
+                yscore += 1
+        return {'X': xscore, 'O': oscore}

@@ -2,6 +2,7 @@
 import random
 import sys
 WIDTH, HEIGHT = 8 # Board is 8 spaces wide & 8 spaces tall
+directions = [[0,1], [1,1], [1,0], [1,-1], [0,-1], [-1,-1], [1,0], [-1,1]]
 
 def drawBoard(board):
     # Print the board passed to this function. Return None.
@@ -31,3 +32,25 @@ def isValidMove(board, tile, xstart, ystart):
         otherTile = 'O'
     else:
         otherTile = 'X'
+
+    tilesToFlip = []
+    for xdirection, ydirection in directions:
+        x, y = xstart, ystart
+        x += xdirection # First step in the x direction
+        y += ydirection # First step in the y direction
+        while isOnBoard(x, y) and board[x][y] == otherTile:
+            # Keep moving in this x & y direction.
+            x += xdirection
+            y += ydirection
+            if isOnBoard(x, y) and board[x][y] == tile:
+                # There are pieces to flip over. Go in the reverse direction
+                # until we reach the original space, noting all tiles along the way
+            while True:
+                x -= xdirection
+                y -= ydirection
+                if x == xstart and y == ystart:
+                    break
+                tilesToFlip.append([x,y])
+    if len(tilesToFlip) == 0: # If no tiles were flipped, this is not a valid move.
+        return False
+    return tilesToFlip

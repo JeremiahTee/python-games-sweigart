@@ -77,5 +77,56 @@ def getScoreOfBoard(board):
             if board[x][y] == 'X':
                 xscore += 1
             if board[x][y] == 'O':
-                yscore += 1
-        return {'X': xscore, 'O': oscore}
+                oscore += 1
+    return {'X': xscore, 'O': oscore}
+
+def enterPlayerTile():
+    # Let the player enter which tile they want to be.
+    # Return a list with the player's tile as the first item and the computer's tile as the second
+    tile = ''
+    while not (tile == 'X' or tile == 'O'):
+        print('Do you want to be X or O?')
+        tile = input().upper()
+
+    # The first element in the list is the player's tile, and the second is the computer's tile
+    if tile == 'X':
+        return(['X', 'O'])
+    else:
+        return (['O', 'X'])
+
+def whoGoesFirst():
+    # Randomly choose who goes first.
+    if random.randint(0,1) == 0:
+            return 'computer'
+        else:
+            return 'player'
+
+def makeMove(board, tile, xstart, ystart):
+    # Place the tile on the board at xstart, ystart, and flip any of the opponent's pieces.
+    # Return False if this is an invalid move, True if is valid
+    tilesToFlip = isValidMove(board, tile, xstart, ystart)
+
+    if tilesToFlip == False:
+        return False
+
+    board[xstart][ystart] = tile
+    for x,y in tilesToFlip:
+        board[x,y] = tile
+    return True
+
+def getBordCopy(board):
+    # Make a duplicate of the list and return it.
+    boardCopy = getNewBoard()
+    for x in range(WIDTH):
+        for y in range(HEIGHT):
+            boardCopy[x][y] = board[x][y]
+
+    return boardCopy
+
+def isOnCorner(x, y):
+    # Return True if the position is in on of the four corners
+    return (x == 0 or x == WIDTH - 1) and  (y == 0 or y == HEIGHT - 1)
+
+def getPlayerMove(board, playerTile):
+    # Let the player enter their move.
+

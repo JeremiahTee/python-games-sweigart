@@ -114,7 +114,7 @@ def makeMove(board, tile, xstart, ystart):
         board[x,y] = tile
     return True
 
-def getBordCopy(board):
+def getBoardCopy(board):
     # Make a duplicate of the list and return it.
     boardCopy = getNewBoard()
     for x in range(WIDTH):
@@ -129,4 +129,27 @@ def isOnCorner(x, y):
 
 def getPlayerMove(board, playerTile):
     # Let the player enter their move.
+    # Return the move as [x, y] (or return the strings 'hint' or 'quit').
+    DIGITS1TO8 = '1 2 3 4 5 6 7 8'.split()
+    while True:
+        print('Enter your move, "quit" to end the game, or "hints" to toggle hints.')
+        move = input().lower()
+        if move == 'quit' or move == 'hints':
+            return move
+
+        if len(move) == 2 and move[0] in DIGITS1TO8 and move[1] in DIGITS1TO8:
+            x = int(move[0]) -1
+            y = int(move[1]) - 1
+            if isValidMove(board, playerTile, x, y) == False:
+                continue
+            else:
+                break
+        else:
+            print('That is not a valid move. Enter the column (1-8) and then the row (1-8).')
+            print('For example, 81 will move on the top-right corner.')
+
+    return [x, y]
+
+def getComputerMove(board, computerTile):
+    
 

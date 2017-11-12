@@ -98,7 +98,7 @@ def whoGoesFirst():
     # Randomly choose who goes first.
     if random.randint(0,1) == 0:
             return 'computer'
-        else:
+    else:
             return 'player'
 
 def makeMove(board, tile, xstart, ystart):
@@ -151,5 +151,25 @@ def getPlayerMove(board, playerTile):
     return [x, y]
 
 def getComputerMove(board, computerTile):
-    
+    # Given a board and the computer's tile, determine where to move and return that move as an [x, y] list
+    possibleMoves = getBoardWithValidMoves(board, computerTile)
+    random.shuffle(possibleMoves) # Randomize the order of the moves.
 
+    # Always go for a corner if available
+    for x, y in possibleMoves:
+        if isOnCorner(x, y):
+            return [x, y]
+
+    # Find the highest-scoring move possible
+    bestScore = -1
+    for x, y in possibleMoves:
+        boardCopy = getBoardCopy(board)
+        makeMove(boardCopy, computerTile, x, y)
+        score = getScoreOfBoard(boardCopy)[computerTile]
+        if score > bestScore:
+            bestMove = [x, y]
+            bestScore = score
+
+def printScore(board, playerTile, computerTile):
+    scores = getScoreOfBoard(board)
+    print('You: %s points. Computer: %s points.' % (scores[playerTile], scores[computerTile]))

@@ -197,3 +197,38 @@ def playGame(playerTile, computerTile):
 
     while True:
         playerValidMoves = getValidMoves(board, playerTile)
+        computerValidMoves = getValidMoves(board, computerTile)
+
+        if playerValidMoves == [] and computerValidMoves == []:
+            return board # No one can move, so end the game
+
+        elif turn == 'player': #Player's turn
+            if playerValidMoves != []:
+                if showHints:
+                    validMovesBoard = getBoardWithValidMoves(board, playerTile)
+                    drawBoard(validMovesBoard)
+                else:
+                    drawBoard(board)
+                printScore(board, playerTile, computerTile)
+
+                move = getPlayerMove(board, playerTile)
+                if move == 'quit':
+                    print('Thanks for playing!')
+                    sys.exit() # Terminate the program
+                elif move == 'hints':
+                    showHints = not showHints
+                    continue
+                else:
+                    makeMove(board, playerTile, move[0], move[1])
+            turn = 'computer'
+
+        elif turn == 'computer': # Computer's turn
+            if computerValidMoves != []:
+                drawBoard(board)
+                printScore(board, playerTile, computerTile)
+
+                input('Press Enter to see the computer\'s move.')
+                move = getComputerMove(board, computerTile)
+                makeMove(board, computerTile, move[0], move[1])
+            turn = 'player'
+

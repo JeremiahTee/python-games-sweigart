@@ -173,3 +173,16 @@ def getComputerMove(board, computerTile):
 def printScore(board, playerTile, computerTile):
     scores = getScoreOfBoard(board)
     print('You: %s points. Computer: %s points.' % (scores[playerTile], scores[computerTile]))
+
+def playGame(playerTile, computerTile):
+    showHints = False
+    turn = whoGoesFirst()
+    print('The ' + turn + ' will go first.')
+
+    #Clear the board and place starting pieces.
+    board = getNewBoard()
+    board[3][3] = 'X'
+    board[3][4] = 'O'
+    board[4][3] = 'O'
+    board[4][4] = 'X'
+

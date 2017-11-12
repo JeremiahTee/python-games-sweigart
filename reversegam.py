@@ -68,6 +68,15 @@ def getBoardWithValidMoves(board, tile):
                 validMoves.append([x, y])
     return validMoves
 
+def getValidMoves(board, tile):
+    # Return a list of [x, y] lists of valid moves for the given player on the given board
+    validMoves = []
+    for x in range(WIDTH):
+        for y in range(HEIGHT):
+            if isValidMove(board, tile, x, y) != False:
+                validMoves.append([x, y])
+    return validMoves
+
 def getScoreOfBoard(board):
     # Determine the score by counting the tiles. Return a dictionary with keys 'X' and 'O'
     xscore = 0
@@ -152,7 +161,7 @@ def getPlayerMove(board, playerTile):
 
 def getComputerMove(board, computerTile):
     # Given a board and the computer's tile, determine where to move and return that move as an [x, y] list
-    possibleMoves = getBoardWithValidMoves(board, computerTile)
+    possibleMoves = getValidMoves(board, computerTile)
     random.shuffle(possibleMoves) # Randomize the order of the moves.
 
     # Always go for a corner if available
@@ -186,3 +195,5 @@ def playGame(playerTile, computerTile):
     board[4][3] = 'O'
     board[4][4] = 'X'
 
+    while True:
+        playerValidMoves = getValidMoves(board, playerTile)

@@ -154,6 +154,7 @@ def getPlayerMove(board, playerTile):
                 continue
             else:
                 break
+
         else:
             print('That is not a valid move. Enter the column (1-8) and then the row (1-8).')
             print('For example, 81 will move on the top-right corner.')
@@ -179,6 +180,7 @@ def getComputerMove(board, computerTile):
         if score > bestScore:
             bestMove = [x, y]
             bestScore = score
+    return bestMove
 
 def printScore(board, playerTile, computerTile):
     scores = getScoreOfBoard(board)

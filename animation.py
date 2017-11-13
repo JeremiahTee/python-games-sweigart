@@ -47,7 +47,7 @@ while True:
             b['rect'].left -= MOVESPEED
             b['rect'].top += MOVESPEED
         if b['dir'] == DOWN_RIGHT:
-            b['rect'].left += MOVESPED
+            b['rect'].left += MOVESPEED
             b['rect'].top += MOVESPEED
         if b['dir'] == UP_LEFT:
             b['rect'].left -= MOVESPEED

@@ -3,7 +3,6 @@ import random
 import sys
 WIDTH = 8
 HEIGHT = 8 # Board is 8 spaces wide & 8 spaces tall
-directions = [[0,1], [1,1], [1,0], [1,-1], [0,-1], [-1,-1], [1,0], [-1,1]]
 
 def drawBoard(board):
     # Print the board passed to this function. Return None.
@@ -29,13 +28,14 @@ def isValidMove(board, tile, xstart, ystart):
     # If it is a valid move, return a list of spaces that would become the player's if they move here
     if board[xstart][ystart] != ' ' or not isOnBoard(xstart, ystart):
         return False
+
     if tile == 'X':
         otherTile = 'O'
     else:
         otherTile = 'X'
 
     tilesToFlip = []
-    for xdirection, ydirection in directions:
+    for xdirection, ydirection in [[0,1], [1,1], [1,0], [1,-1], [0,-1], [-1,-1], [1,0], [-1,1]]:
         x, y = xstart, ystart
         x += xdirection # First step in the x direction
         y += ydirection # First step in the y direction
@@ -100,9 +100,9 @@ def enterPlayerTile():
 
     # The first element in the list is the player's tile, and the second is the computer's tile
     if tile == 'X':
-        return(['X', 'O'])
+        return ['X', 'O']
     else:
-        return (['O', 'X'])
+        return ['O', 'X']
 
 def whoGoesFirst():
     # Randomly choose who goes first.

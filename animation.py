@@ -25,7 +25,7 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 
 # Set up box data structure.
-b1 = {'rect': pygame.Rect(200, 80, 50, 100), 'color': RED, 'dir': UP_RIGHT}
+b1 = {'rect': pygame.Rect(300, 80, 50, 100), 'color': RED, 'dir': UP_RIGHT}
 b2 =  {'rect': pygame.Rect(200, 200, 20, 20), 'color': GREEN, 'dir': UP_LEFT}
 b3 =  {'rect': pygame.Rect(100, 150, 60, 60), 'color': BLUE, 'dir': DOWN_LEFT}
 boxes = [b1, b2, b3]
@@ -39,7 +39,7 @@ while True:
             sys.exit()
 
     # Draw the white background onto the surface
-            windowSurface.fill(WHITE)
+    windowSurface.fill(WHITE)
 
     for b in boxes:
         # Move the box data structure.
@@ -86,7 +86,7 @@ while True:
                 b['dir'] = UP_LEFT
 
         # Draw the box onto the surface
-                pygame.draw.rect(windowSurface, b['color'], b['rect'])
+        pygame.draw.rect(windowSurface, b['color'], b['rect'])
 
     #Draw the window into the screen
     pygame.display.update()

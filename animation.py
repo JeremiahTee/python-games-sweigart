@@ -25,9 +25,9 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 
 # Set up box data structure.
-b1 = {'rect': pygame.rect(200, 80, 50, 100), 'color': RED, 'dir': UP_RIGHT}
-b2 =  {'rect': pygame.rect(200, 200, 20, 20), 'color': GREEN, 'dir': UP_LEFT}
-b3 =  {'rect': pygame.rect(100, 150, 60, 60), 'color': BLUE, 'dir': DOWN_LEFT}
+b1 = {'rect': pygame.Rect(200, 80, 50, 100), 'color': RED, 'dir': UP_RIGHT}
+b2 =  {'rect': pygame.Rect(200, 200, 20, 20), 'color': GREEN, 'dir': UP_LEFT}
+b3 =  {'rect': pygame.Rect(100, 150, 60, 60), 'color': BLUE, 'dir': DOWN_LEFT}
 boxes = [b1, b2, b3]
 
 # Run the game loop.

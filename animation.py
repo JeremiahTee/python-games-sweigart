@@ -32,4 +32,64 @@ boxes = [b1, b2, b3]
 
 # Run the game loop.
 while True:
-    # 
+    # Check for the QUIT event
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
+
+    # Draw the white background onto the surface
+            windowSurface.fill(WHITE)
+
+    for b in boxes:
+        # Move the box data structure.
+        if b['dir'] == DOWN_LEFT :
+            b['rect'].left -= MOVESPEED
+            b['rect'].top += MOVESPEED
+        if b['dir'] == DOWN_RIGHT:
+            b['rect'].left += MOVESPED
+            b['rect'].top += MOVESPEED
+        if b['dir'] == UP_LEFT:
+            b['rect'].left -= MOVESPEED
+            b['rect'].top -= MOVESPEED
+        if b['dir'] == UP_RIGHT:
+            b['rect'].left += MOVESPEED
+            b['rect'].top -= MOVESPEED
+
+        # Check whether the box has moved out of the window.
+        if b['rect'].top < 0:
+            # The box has moved past the top.
+            if b['dir'] == UP_LEFT:
+                b['dir'] = DOWN_LEFT
+            if b['dir'] == UP_RIGHT:
+                b['dir'] = DOWN_RIGHT
+
+        if b['rect'] > WINDOW_HEIGHT:
+            # The box has moved past the bottom.
+            if b['dir'] == DOWN_LEFT:
+                b['dir'] = UP_LEFT
+            if b['dir'] == DOWN_RIGHT:
+                b['dir'] = UP_RIGHT
+
+        if b['rect'].left < 0:
+            # The box has moved past the left side.
+            if b['dir'] == DOWN_LEFT:
+                b['dir'] = DOWN_RIGHT
+            if b['dir'] == UP_LEFT:
+                b['dir'] = UP_RIGHT
+
+        if b['rect'].right > WINDOW_WIDTH:
+            # The box has moved past the right side.
+            if b['dir'] == DOWN_RIGHT:
+                b['dir'] = DOWN_LEFT
+            if b['dir'] == UP_RIGHT:
+                b['dir'] = UP_LEFT
+
+        # Draw the box onto the surface
+                pygame.draw.rect(windowSurface, b['color'], b['rect'])
+
+    #Draw the window into the screen
+    pygame.display.update()
+    time.sleep(0.02)
+
+

@@ -121,7 +121,7 @@ def makeMove(board, tile, xstart, ystart):
 
     board[xstart][ystart] = tile
     for x,y in tilesToFlip:
-        board[x,y] = tile
+        board[x][y] = tile
     return True
 
 def getBoardCopy(board):

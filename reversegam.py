@@ -1,7 +1,8 @@
 # Reversegam: a clone of Othello/Reversi, Chapter 15
 import random
 import sys
-WIDTH, HEIGHT = 8 # Board is 8 spaces wide & 8 spaces tall
+WIDTH = 8
+HEIGHT = 8 # Board is 8 spaces wide & 8 spaces tall
 directions = [[0,1], [1,1], [1,0], [1,-1], [0,-1], [-1,-1], [1,0], [-1,1]]
 
 def drawBoard(board):

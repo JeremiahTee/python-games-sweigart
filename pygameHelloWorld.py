@@ -45,3 +45,16 @@ pygame.draw.rect(windowSurface, RED, (textRect.left - 20, textRect.top - 20, tex
 pixArray = pygame.PixelArray(windowSurface)
 pixArray[480][380] = BLACK
 del pixArray
+
+# Draw the text onto the surface.
+windowSurface.blit(text, textRect)
+
+# Draw the window onto the screen.
+pygame.display.update()
+
+# Run the game loop
+while True:
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()

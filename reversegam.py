@@ -7,15 +7,15 @@ directions = [[0,1], [1,1], [1,0], [1,-1], [0,-1], [-1,-1], [1,0], [-1,1]]
 
 def drawBoard(board):
     # Print the board passed to this function. Return None.
-    print('     12345678')
-    print('     +--------+')
+    print(' 12345678')
+    print(' +--------+')
     for y in range(HEIGHT):
-        print('%s|' % (y+1), end='') # left column
+        print('%s|' % (y+1), end='')
         for x in range(WIDTH):
             print(board[x][y], end='')
-        print('%s|' % (y + 1), end='') # right column
-    print('     +--------+')
-    print('     12345678')
+        print('|%s' % (y+1))
+    print(' +--------+')
+    print(' 12345678')
 
 def getNewBoard():
     # Create a brand-new, blank board data structure

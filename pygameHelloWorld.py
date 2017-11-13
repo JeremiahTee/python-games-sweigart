@@ -2,10 +2,11 @@ import pygame, sys
 from pygame.locals import *
 
 # Set up pygame.
-pygame.init()
+pygame.init() # must do before anything, initializes pygame so it's read to use
 
 # Set up the window
-windowSurface = pygame.display.set_mode((500,400), 0, 32)
+windowSurface = pygame.display.set_mode((500,400), 0, 32) #500 px wide and 400 px tall by using tuple
+#set_mode() returns a pygame.Surface object
 pygame.display.set_caption('Hello world')
 
 # Set up the colors
@@ -16,7 +17,7 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 
 # Set up the fonts
-basicFont = pygame.font.SysFont(None, 48)
+basicFont = pygame.font.SysFont(None, 48) #Font object
 
 # Set up the text
 text = basicFont.render('Hello world!', True, WHITE, BLUE)
@@ -42,7 +43,7 @@ pygame.draw.ellipse(windowSurface, RED, (300, 250, 40, 80), 1)
 pygame.draw.rect(windowSurface, RED, (textRect.left - 20, textRect.top - 20, textRect.width + 40, textRect.height + 40))
 
 # Get a pixel array of the surface
-pixArray = pygame.PixelArray(windowSurface)
+pixArray = pygame.PixelArray(windowSurface) #Pixel Array object
 pixArray[480][380] = BLACK
 del pixArray
 
@@ -56,5 +57,5 @@ pygame.display.update()
 while True:
     for event in pygame.event.get():
         if event.type == QUIT:
-            pygame.quit()
+            pygame.quit() #call this before ending program
             sys.exit()

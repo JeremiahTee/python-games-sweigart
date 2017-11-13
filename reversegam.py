@@ -6,7 +6,7 @@ HEIGHT = 8 # Board is 8 spaces wide & 8 spaces tall
 
 def drawBoard(board):
     # Print the board passed to this function. Return None.
-    print(' 12345678')
+    print('  12345678')
     print(' +--------+')
     for y in range(HEIGHT):
         print('%s|' % (y+1), end='')
@@ -14,7 +14,7 @@ def drawBoard(board):
             print(board[x][y], end='')
         print('|%s' % (y+1))
     print(' +--------+')
-    print(' 12345678')
+    print('  12345678')
 
 def getNewBoard():
     # Create a brand-new, blank board data structure
@@ -62,12 +62,11 @@ def isOnBoard(x, y):
 
 def getBoardWithValidMoves(board, tile):
     # Return a new board with periods marking the valid moves the player can make
-    validMoves = []
-    for x in range(WIDTH):
-        for y in range(HEIGHT):
-            if isValidMove(board, tile, x, y) != False:
-                validMoves.append([x, y])
-    return validMoves
+    boardCopy = getBoardCopy(board)
+
+    for x,y in getValidMoves(boardCopy, tile):
+        boardCopy[x][y] = '.'
+    return boardCopy
 
 def getValidMoves(board, tile):
     # Return a list of [x, y] lists of valid moves for the given player on the given board

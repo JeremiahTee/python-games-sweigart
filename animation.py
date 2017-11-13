@@ -64,7 +64,7 @@ while True:
             if b['dir'] == UP_RIGHT:
                 b['dir'] = DOWN_RIGHT
 
-        if b['rect'] > WINDOW_HEIGHT:
+        if b['rect'].bottom > WINDOW_HEIGHT:
             # The box has moved past the bottom.
             if b['dir'] == DOWN_LEFT:
                 b['dir'] = UP_LEFT

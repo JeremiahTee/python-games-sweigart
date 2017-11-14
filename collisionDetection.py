@@ -74,7 +74,7 @@ while True:
                 foods.appends(pygame.Rect(event.pos[0], event.pos[1], FOOD_SIZE, FOOD_SIZE))
 
         foodCounter += 1
-        if foodCounter >= NEW_FOOD
+        if foodCounter >= NEW_FOOD:
             # Add new food.
             foodCounter = 0
             foods.append(pygame.Rect(random.randint(0, WINDOW_WIDTH - FOOD_SIZE), random.randint(0, WINDOW_HEIGHT - FOOD_SIZE), FOOD_SIZE, FOOD_SIZE))
@@ -88,7 +88,7 @@ while True:
         if moveUp and player.top > 0:
             player.top -= MOVE_SPEED
 
-        if moveLeft and player.left > 0
+        if moveLeft and player.left > 0:
             player.left -= MOVE_SPEED
         if moveRight and player.right < WINDOW_WIDTH:
             player.right += MOVE_SPEED

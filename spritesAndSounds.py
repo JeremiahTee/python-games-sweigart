@@ -32,7 +32,7 @@ moveRight = False
 moveUp = False
 moveDown = False
 
-MOVESPEED = 6
+MOVESPEED = 20
 
 # Set up the music
 pickUpSound = pygame.mixer.Sound('pickup.wav')
@@ -61,6 +61,7 @@ while True:
             if event.key == K_DOWN or event.key == K_s:
                 moveUp = False
                 moveDown = True
+
         if event.type == KEYUP:
                 if event.key == K_ESCAPE:
                     pygame.quit()
@@ -70,7 +71,7 @@ while True:
                 if event.key == K_RIGHT or event.key == K_d:
                     moveRight = False
                 if event.key == K_UP or event.key == K_w:
-                    moveUp = False
+                   moveUp = False
                 if event.key == K_DOWN or event.key == K_s:
                     moveDown = False
                 if event.key == K_x:
@@ -93,8 +94,19 @@ while True:
             foods.append(pygame.Rect(random.randint(0, WINDOW_WIDTH - 36), random.randint(0, WINDOW_HEIGHT - 36), 36, 36))
 
         # Draw the white background onto the surface
+        windowSurface.fill(WHITE)
         windowSurface.blit(playerStretchedImage, player)
-        
+
+        # Move the player
+
+        if moveDown and player.bottom < WINDOW_HEIGHT:
+            player.top += MOVESPEED
+        if moveUp and player.top > 0:
+            player.top -= MOVESPEED
+        if moveLeft and player.left > 0:
+            player.left -= MOVESPEED
+        if moveRight and player.right < WINDOW_WIDTH:
+            player.right += MOVESPEED
 
         # Check whether the block has intersected with any food squares
         for food in foods[:]:

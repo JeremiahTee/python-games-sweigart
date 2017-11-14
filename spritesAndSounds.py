@@ -3,7 +3,7 @@ from pygame.locals import *
 
 # Set up pygame.
 pygame.init()
-mainClock = pygame.time.clock()
+mainClock = pygame.time.Clock()
 
 # Set up the window
 WINDOW_WIDTH = 1000
@@ -94,6 +94,23 @@ while True:
 
         # Draw the white background onto the surface
         windowSurface.blit(playerStretchedImage, player)
+
+        # Check whether the block has intersected with any food squares
+        for food in foods[:]:
+            if player.colliderect(food):
+                foods.remove(food)
+                player = pygame.Rect(player.left, player.top, player.width + 2, player.height + 2)
+                playerStretchedImage = pygame.transform.scale(playerImage, (player.width, player.height))
+                if musicPlaying:
+                    pickUpSound.play()
+
+        # Draw the food
+        for food in foods:
+            windowSurface.blit(foodImage, food)
+
+        # Draw window onto the screen
+        pygame.display.update()
+        mainClock.tick(40)
 
 
 

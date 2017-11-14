@@ -40,3 +40,65 @@ pygame.mixer.music.load('background.mid')
 pygame.mixer.music.play(-1,0.0)
 musicPlaying = True
 
+# Run the game loop
+while True:
+    # Check for the QUIT event
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
+        if event.type == KEYDOWN:
+            # Change the keyboard variables
+            if event.key == K_LEFT or event.key == K_a:
+                moveRight = False
+                moveLeft = True
+            if event.key == K_RIGHT or event.key == K_d:
+                moveLeft = False
+                moveRight = True
+            if event.key == K_UP or event.key == K_w:
+                moveDown = False
+                moveUp = True
+            if event.key == K_DOWN or event.key == K_s:
+                moveUp = False
+                moveDown = True
+        if event.key == KEYUP:
+                if event.key == K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
+                if event.key == K_LEFT or event.key == K_a:
+                    moveLeft = False
+                if event.key == K_RIGHT or event.key == K_d:
+                    moveRight = False
+                if event.key == K_UP or event.key == K_w:
+                    moveUp = False
+                if event.key == K_DOWN or event.key == K_s:
+                    moveDown = False
+                if event.key == K_x:
+                    player.top = random.randint(0, WINDOW_HEIGHT - player.height)
+                    player.left = random.randint(0, WINDOW_WIDTH - player.width)
+                if event.key == K_m:
+                    if musicPlaying:
+                        pygame.mixer.music.stop()
+                    else:
+                        pygame.mixer.music.play(-1, 0.0)
+                    musicPlaying = not musicPlaying
+
+        if event.type == MOUSEBUTTONUP:
+            foods.append(pygame.Rect(event.pos[0] - 10, event.pos[1] - 10, 36, 36))
+
+        foodCounter += 1
+        if foodCounter >= NEWFOOD:
+            # Add new food
+            foodCounter = 0
+            foods.append(pygame.Rect(random.randint(0, WINDOW_WIDTH - 36), random.randint(0, WINDOW_HEIGHT - 36), 36, 36))
+
+        # Draw the white background onto the surface
+        windowSurface.blit(playerStretchedImage, player)
+
+
+
+
+
+
+
+

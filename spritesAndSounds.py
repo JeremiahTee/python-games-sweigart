@@ -8,7 +8,7 @@ mainClock = pygame.time.Clock()
 # Set up the window
 WINDOW_WIDTH = 1000
 WINDOW_HEIGHT = 600
-windowSurface = pygame.display.set_mode(WINDOW_WIDTH, WINDOW_HEIGHT, 0, 32)
+windowSurface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), 0, 32)
 pygame.display.set_caption('Trump eats Hilary')
 
 # Set up the colors
@@ -61,7 +61,7 @@ while True:
             if event.key == K_DOWN or event.key == K_s:
                 moveUp = False
                 moveDown = True
-        if event.key == KEYUP:
+        if event.type == KEYUP:
                 if event.key == K_ESCAPE:
                     pygame.quit()
                     sys.exit()
@@ -94,6 +94,7 @@ while True:
 
         # Draw the white background onto the surface
         windowSurface.blit(playerStretchedImage, player)
+        
 
         # Check whether the block has intersected with any food squares
         for food in foods[:]:

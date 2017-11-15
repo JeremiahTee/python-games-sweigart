@@ -65,3 +65,76 @@ pygame.display.update()
 waitForPlayerToPressKey()
 
 topScore = 0
+
+# Core of game
+while True:
+    # Set up the start of the game
+    baddies = []
+    score = 0
+    playerRect.topleft = (WINDOW_WIDTH / 2, WINDOW_HEIGHT - 50) # Position of player
+    moveLeft = moveRight = moveUp = moveDown = False
+    reverseCheat = slowCheat = False
+    baddieAddCounter = 0
+    pygame.mixer.music.play(-1, 0.0)
+
+    while True: # The game loop runs while the game part is playing
+        score += 1 # Increase score
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                terminate()
+
+            if event.type == KEYDOWN:
+                if event.key == K_z:
+                    reverseCheat = True
+                if event.key == K_x:
+                    slowCheat = True
+                if event.key == K_LEFT or event.key == K_a:
+                    moveRight = False
+                    moveLeft = True
+                if event.key == K_RIGHT or event.key == K_d:
+                    moveLeft = False
+                    moveRight = True
+                if event.key == K_UP or event.key == K_w:
+                    moveDown = False
+                    moveUp = True
+                if event.key == K_DOWN or event.key == K_s:
+                    moveUp = False
+                    moveDown = True
+
+                if event.key == KEYUP:
+                    if event.key == K_z:
+                        reverseCheat = False
+                        score = 0
+                    if event.key == K_x:
+                        slowCheat = False
+                        score = 0
+                    if event.key == K_ESCAPE:
+                        terminate()
+
+                    if event.key == K_LEFT or event.key == K_a:
+                        moveLeft = False
+                    if event.key == K_RIGHT or event.key == K_d:
+                        moveRight = False
+                    if event.key == K_UP or event.key == K_w:
+                        moveUp = False
+                    if event.key == K_DOWN or event.key == K_s:
+                        moveDown = False
+
+                if event.type == MOUSEMOTION:
+                    # If the mouse moves, move the player to the cursor.
+                    playerRect.centerx = event.pos[0]
+                    playerRect.centery = event.pos[1]
+                # Add new baddies at the to of the screen, if needed
+                if not reverseCheat and not slowCheat:
+                    baddieAddCounter += 1
+                if baddieAddCounter == RATE_NEW_BADDIE:
+                    baddieAddCounter = 0
+                    baddieSize = random.randint(BADDIE_MIN_SIZE, BADDIE_MAX_SIZE)
+                    newBaddie = {'rect': pygame.Rect(random.randint(0, WINDOW_WIDTH - baddieSize), 0 - baddieSize, baddieSize)
+                                 'speed': random.randint(BADDIE_MIN_SPEED, BADDIE_MAX_SPEED)
+                                 'surface': pygame.transform.scale(baddieImage, (baddieSize, baddieSize))
+                    }
+                    baddies.append(newBaddie)
+
+                

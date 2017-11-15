@@ -35,9 +35,9 @@ moveDown = False
 MOVESPEED = 20
 
 # Set up the music
-pickUpSound = pygame.mixer.Sound('pickup.wav')
+pickUpSound = pygame.mixer.Sound('pickup.wav') # called constructor for Sound object
 pygame.mixer.music.load('background.mid')
-pygame.mixer.music.play(-1,0.0)
+pygame.mixer.music.play(-1, 0.0) # -1 makes background music repeat forever, 0.0 seconds to start from beginning
 musicPlaying = True
 
 # Run the game loop
@@ -110,7 +110,7 @@ while True:
 
         # Check whether the block has intersected with any food squares
         for food in foods[:]:
-            if player.colliderect(food):
+            if player.colliderect(food):  # when Trump eats each Hilary, increase size by 2
                 foods.remove(food)
                 player = pygame.Rect(player.left, player.top, player.width + 2, player.height + 2)
                 playerStretchedImage = pygame.transform.scale(playerImage, (player.width, player.height))

@@ -32,7 +32,7 @@ moveRight = False
 moveUp = False
 moveDown = False
 
-MOVESPEED = 20
+MOVESPEED = 5
 
 # Set up the music
 pickUpSound = pygame.mixer.Sound('pickup.wav') # called constructor for Sound object
@@ -87,43 +87,42 @@ while True:
         if event.type == MOUSEBUTTONUP:
             foods.append(pygame.Rect(event.pos[0] - 10, event.pos[1] - 10, 36, 36))
 
-        foodCounter += 1
-        if foodCounter >= NEWFOOD:
-            # Add new food
-            foodCounter = 0
-            foods.append(pygame.Rect(random.randint(0, WINDOW_WIDTH - 36), random.randint(0, WINDOW_HEIGHT - 36), 36, 36))
+    foodCounter += 1
+    if foodCounter >= NEWFOOD:
+        # Add new food
+        foodCounter = 0
+        foods.append(pygame.Rect(random.randint(0, WINDOW_WIDTH - 36), random.randint(0, WINDOW_HEIGHT - 36), 36, 36))
 
-        # Draw the white background onto the surface
-        windowSurface.fill(WHITE)
-        windowSurface.blit(playerStretchedImage, player)
+    # Draw the white background onto the surface
+    windowSurface.fill(WHITE)
+    windowSurface.blit(playerStretchedImage, player)
 
-        # Move the player
+    # Move the player
+    if moveDown and player.bottom < WINDOW_HEIGHT:
+        player.move_ip(0, MOVESPEED)
+    if moveUp and player.top > 0:
+        player.move_ip(0, -1 * MOVESPEED)
+    if moveLeft and player.left > 0:
+        player.move_ip(-1 * MOVESPEED, 0)
+    if moveRight and player.right < WINDOW_WIDTH:
+        player.move_ip(MOVESPEED, 0)
 
-        if moveDown and player.bottom < WINDOW_HEIGHT:
-            player.top += MOVESPEED
-        if moveUp and player.top > 0:
-            player.top -= MOVESPEED
-        if moveLeft and player.left > 0:
-            player.left -= MOVESPEED
-        if moveRight and player.right < WINDOW_WIDTH:
-            player.right += MOVESPEED
+    # Check whether the block has intersected with any food squares
+    for food in foods[:]:
+        if player.colliderect(food):  # when Trump eats each Hilary, increase size by 2
+            foods.remove(food)
+            player = pygame.Rect(player.left, player.top, player.width + 2, player.height + 2)
+            playerStretchedImage = pygame.transform.scale(playerImage, (player.width, player.height))
+            if musicPlaying:
+                pickUpSound.play()
 
-        # Check whether the block has intersected with any food squares
-        for food in foods[:]:
-            if player.colliderect(food):  # when Trump eats each Hilary, increase size by 2
-                foods.remove(food)
-                player = pygame.Rect(player.left, player.top, player.width + 2, player.height + 2)
-                playerStretchedImage = pygame.transform.scale(playerImage, (player.width, player.height))
-                if musicPlaying:
-                    pickUpSound.play()
+    # Draw the food
+    for food in foods:
+        windowSurface.blit(foodImage, food)
 
-        # Draw the food
-        for food in foods:
-            windowSurface.blit(foodImage, food)
-
-        # Draw window onto the screen
-        pygame.display.update()
-        mainClock.tick(40)
+    # Draw window onto the screen
+    pygame.display.update()
+    mainClock.tick(60)
 
 
 

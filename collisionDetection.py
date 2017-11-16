@@ -40,6 +40,7 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
+
         if event.type == KEYDOWN:
             # Change the keyboard variables
             if event.key == K_LEFT or event.key == K_a:
@@ -54,24 +55,25 @@ while True:
             if event.key == K_DOWN or event.key == K_s:
                 moveUp = False
                 moveDown = True
-            if event.key == KEYUP:
-                if event.key == K_ESCAPE:
-                    pygame.quit()
-                    sys.exit()
-                if event.key == K_LEFT or event.key == K_a:
-                    moveLeft = False
-                if event.key == K_RIGHT or event.key == K_d:
-                    moveRight = False
-                if event.key == K_UP or event.key == K_w:
-                    moveUp = False
-                if event.key == K_DOWN or event.key == K_s:
-                    moveDown = False
-                if event.key == K_x:
-                    player.top = random.randint(0, WINDOW_HEIGHT - player.height)
-                    player.bottom = random.randint(0, WINDOW_WIDTH - player.width)
 
-            if event.type == MOUSEBUTTONUP:
-                foods.appends(pygame.Rect(event.pos[0], event.pos[1], FOOD_SIZE, FOOD_SIZE))
+        if event.type == KEYUP:
+            if event.key == K_ESCAPE:
+                pygame.quit()
+                sys.exit()
+            if event.key == K_LEFT or event.key == K_a:
+                moveLeft = False
+            if event.key == K_RIGHT or event.key == K_d:
+                moveRight = False
+            if event.key == K_UP or event.key == K_w:
+                moveUp = False
+            if event.key == K_DOWN or event.key == K_s:
+                moveDown = False
+            if event.key == K_x:
+                player.top = random.randint(0, WINDOW_HEIGHT - player.height)
+                player.bottom = random.randint(0, WINDOW_WIDTH - player.width)
+
+        if event.type == MOUSEBUTTONUP:
+            foods.append(pygame.Rect(event.pos[0], event.pos[1], FOOD_SIZE, FOOD_SIZE))
 
         foodCounter += 1
         if foodCounter >= NEW_FOOD:
@@ -107,4 +109,4 @@ while True:
 
         # Draw the window onto the screen
         pygame.display.update()
-        mainClock.tick(40)
+        mainClock.tick(60)
